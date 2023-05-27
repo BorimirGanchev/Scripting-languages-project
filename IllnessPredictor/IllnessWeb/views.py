@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from .forms import LoginForm
 
 from .forms import SignupForm
 

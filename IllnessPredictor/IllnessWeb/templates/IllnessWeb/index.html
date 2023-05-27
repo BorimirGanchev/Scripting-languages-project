@@ -5,9 +5,15 @@
 {% block contend %}
     <h1 class="text-7xl mt-10">Illness Predictor</h1>
     <div class="flex items-center justify-center">
-        <p class="whitespace-normal w-1/3 mt-40">ijdfij wawoisdoase as saji doijas dijsaoia ijodas oiasdjasj soidoisja oasj s jdoasjd saaoj dasoijdoiaisj saaj daso oasjodasojd sdoisajodi asjdasoasojdas o oasjoas</p>
+        <p class="whitespace-normal w-1/3 mt-40 mb-20 text-xl">Whether you're a medical professional or an individual curious about your health, our product is here to help you. With our innovative solution, you can easily assess your health condition and gain valuable insights.</p>
     </div>
-    <button class="mt-32 bg-teal-700 text-white hover:bg-teal-900 font-bold py-7 px-8 rounded-full text-3xl w-3/6" >
-        Go to the Search Engine
-    </button>    
+    {% if request.user.is_authenticated %}
+        <div class="flex justify-center">
+            <a href="{% url 'IllnessWeb:search' %}"  class="absolute mt-10 bg-teal-700 text-white hover:bg-teal-900 font-bold py-7 px-8 rounded-full text-3xl w-4/6" >Go to the Search Engine</a>
+        </div>
+    {% else %}
+        <div class="flex justify-center">
+            <a href="{% url 'IllnessWeb:login' %}"  class="absolute mt-10 bg-teal-700 text-white hover:bg-teal-900 font-bold py-7 px-8 rounded-full text-3xl w-4/6" >Go to the Search Engine</a>
+        </div>
+    {% endif %}
 {% endblock %}

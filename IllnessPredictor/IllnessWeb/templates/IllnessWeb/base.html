@@ -12,8 +12,15 @@
             <a href="/" class="text-xl font-semibold">IllnessWeb</a>
 
             <div class="space-x-6">
-                <a href="{% url 'IllnessWeb:signup' %}" class="px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Sign up</a>
-                <a href="#" class="px-6 py-3 text-lg font-semibold bg-gray-500 text-white rounded-xl hover:bg-gray-700">Log in</a>
+                {% if request.user.is_authenticated %}
+                    <div class="flex justify-between gap-4 items-center">
+                        <h1 class="px-6 py-3 text-lg font-semibold bg-gray-500 text-white rounded-xl">User:</h1>
+                        <a href="{% url 'IllnessWeb:logout' %}" class="px-6 py-3 text-lg font-semibold bg-red-500 text-white rounded-xl hover:bg-red-700">Logout</a>
+                    </div>
+                {% else %}
+                    <a href="{% url 'IllnessWeb:signup' %}" class="px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Sign up</a>
+                    <a href="{% url 'IllnessWeb:login' %}" class="px-6 py-3 text-lg font-semibold bg-gray-500 text-white rounded-xl hover:bg-gray-700">Log in</a>
+                {% endif %}
             </div>
         </nav>
 
@@ -26,7 +33,7 @@
     <footer class="py-6 px-6 flex justify-between bg-gray-800">
         <div class="w-2/3 pr-10">
             <h3 class="mb-5 font-semibold text-gray-400">About</h3>
-            <p class="text-lg text-gray-500">Lorem ipsum bla bla bla. Lorem ipsum bla bla bla. Lorem ipsum bla bla bla.</p>
+            <p class="text-lg text-gray-500">Our compnay has developed a software that combines the latest advancements in machine learning and medical expertise to provide reliable predictions, aiding in early detection and proactive healthcare management. Our user-friendly interface ensures a seamless experience, allowing users to input their symptoms easily and receive instant results.</p>
         </div>
 
         <div class="w-1/4">
