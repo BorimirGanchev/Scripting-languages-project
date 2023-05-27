@@ -1,10 +1,11 @@
-from django.urls import path 
-from django.contrib import admin
+from django.urls import path
 
-from IllnessWeb.views import index, search
+from . import views
+
+app_name = 'IllnessWeb'
 
 urlpatterns = [
-    path('', index, name= 'index'),
-    path('search/', search, name= 'search'),
-    path('admin/', admin.site.urls),
+    path('', views.index, name='index'),
+    path('search/', views.search, name= 'search'),
+    path('signup/', views.signup, name='signup'),
 ]
