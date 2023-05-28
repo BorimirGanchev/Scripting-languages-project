@@ -2,12 +2,16 @@ from django.shortcuts import render, redirect
 from .forms import LoginForm
 
 from .forms import SignupForm
+from item.models import Item
 
 def index(request): 
     return render(request, 'IllnessWeb/index.html')
 
 def search(request):
-    return render(request, 'IllnessWeb/search.html')
+    items = Item.objects.all()
+    return render(request, 'IllnessWeb/search.html',{
+        'items': items,
+    })
 
 def signup(request):
     if request.method == 'POST':
