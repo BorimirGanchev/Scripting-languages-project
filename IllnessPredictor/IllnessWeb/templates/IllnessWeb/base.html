@@ -14,7 +14,8 @@
             <div class="space-x-6">
                 {% if request.user.is_authenticated %}
                     <div class="flex justify-between gap-4 items-center">
-                        <h1 class="px-6 py-3 text-lg font-semibold bg-gray-500 text-white rounded-xl">User:</h1>
+                        <h1 class="px-6 py-3 text-lg font-semibold bg-gray-500 text-white rounded-xl">User: {{ user.get_username }}</h1>
+                        <a href="{% url 'IllnessWeb:index' %}" class="px-6 py-3 text-lg font-semibold bg-green-500 text-white rounded-xl hover:bg-green-700">Home</a>
                         <a href="{% url 'IllnessWeb:logout' %}" class="px-6 py-3 text-lg font-semibold bg-red-500 text-white rounded-xl hover:bg-red-700">Logout</a>
                     </div>
                 {% else %}

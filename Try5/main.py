@@ -22,27 +22,28 @@ class SymptomMatcher:
                     my_string = ' '.join(symptoms)
                     doc = self.nlp(my_string)
                     sentence = list(doc.sents)[0]
-                    self.collection_symptoms.append((collection_name, document["_id"], sentence))
+                    self.collection_symptoms.append(( document["description"], sentence))
 
     def match_symptoms(self, input_text):
         input_text = self.nlp(input_text)
-        max_percentage = -1.0
-        max_collection = None
-        max_document_id = None
+        matches = []
         
-        for collection_name, document_id, search in self.collection_symptoms:
+        for description, search in self.collection_symptoms:
             percentage = round((input_text.similarity(search) * 100), 1)
             print(f"{percentage}%")
             
-            if percentage > max_percentage:
-                max_percentage = percentage
-                max_collection = collection_name
-                max_document_id = document_id
+            matches.append((description, percentage))
         
-        print("Document ID:", max_document_id)
-        return max_collection, max_document_id
+        # Sort matches in descending order based on percentage
+        sorted_matches = sorted(matches, key=lambda x: x[1], reverse=True)
+        
+        for match in sorted_matches:
+            description, percentage = match
+            print(f"{description}, Percentage: {percentage}%")
+        
+        return sorted_matches
 
 # Usage example
 symptom_matcher = SymptomMatcher()
 symptom_matcher.load_symptoms()
-collection_name, document_id = symptom_matcher.match_symptoms("I have a pain in the chest")
+matches = symptom_matcher.match_symptoms("I have a cat")
